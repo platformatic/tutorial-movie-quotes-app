@@ -1,0 +1,26 @@
+{
+  "name": "tutorial-movie-quotes-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "standard | snazzy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/platformatic/tutorial-movie-quotes-app.git"
+  },
+  "keywords": [],
+  "author": "Simon Plenderleith <simon@simonplend.co.uk> (https://simonplend.com/)",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/platformatic/tutorial-movie-quotes-app/issues"
+  },
+  "homepage": "https://github.com/platformatic/tutorial-movie-quotes-app#readme",
+  "private": true,
+  "devDependencies": {
+    "@fastify/pre-commit": "^2.0.2",
+    "snazzy": "^9.0.0",
+    "standard": "^17.0.0"
+  }
+}
