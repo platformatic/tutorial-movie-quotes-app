@@ -1,9 +1,41 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { quotesApi, gql } from '../lib/quotes-api';
+
+const { data } = await quotesApi.query(gql`
+  query {
+    quotes {
+      id
+      quote
+      saidBy
+      createdAt
+      movie {
+        id
+        name
+      }
+    }
+  }
+`);
+
+const quotes = data?.quotes || [];
 ---
 
 <Layout title="All quotes" page="listing">
   <main>
-    <p>We'll list all the movie quotes here.</p>
+    {quotes.length > 0 ? quotes.map((quote) => (
+      <div>
+        <blockquote>
+          <p>{quote.quote}</p>
+        </blockquote>
+        <p>
+          — {quote.saidBy}, {quote.movie?.name}
+        </p>
+        <div>
+          <span>Added {new Date(quote.createdAt).toUTCString()}</span>
+        </div>
+      </div>
+    )) : (
+      <p>No movie quotes have been added.</p>
+    )}
   </main>
 </Layout>
