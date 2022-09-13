@@ -13,5 +13,9 @@
   "license": "UNLICENSED",
   "devDependencies": {
     "astro": "^1.2.2"
+  },
+  "dependencies": {
+    "@urql/core": "^3.0.3",
+    "graphql": "^16.6.0"
   }
 }
