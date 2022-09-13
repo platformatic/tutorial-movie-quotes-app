@@ -1,0 +1,28 @@
+---
+export interface Props {
+  title: string;
+  page?: string;
+}
+
+const { title, page } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <header>
+      <h1>🎬 Movie Quotes</h1>
+    </header>
+    <nav>
+      <a href="/">All quotes</a>
+    </nav>
+    <section>
+      <slot />
+    </section>
+  </body>
+</html>
