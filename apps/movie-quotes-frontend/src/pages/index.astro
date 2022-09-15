@@ -23,15 +23,15 @@ const quotes = data?.quotes || [];
 <Layout title="All quotes" page="listing">
   <main>
     {quotes.length > 0 ? quotes.map((quote) => (
-      <div>
-        <blockquote>
-          <p>{quote.quote}</p>
+      <div class="border-b mb-6">
+        <blockquote class="text-2xl mb-0">
+          <p class="mb-4">{quote.quote}</p>
         </blockquote>
-        <p>
+        <p class="text-xl mt-0 mb-8 text-gray-400">
           — {quote.saidBy}, {quote.movie?.name}
         </p>
-        <div>
-          <span>Added {new Date(quote.createdAt).toUTCString()}</span>
+        <div class="flex flex-col mb-6 text-gray-400">
+          <span class="text-gray-400 italic">Added {new Date(quote.createdAt).toUTCString()}</span>
         </div>
       </div>
     )) : (
