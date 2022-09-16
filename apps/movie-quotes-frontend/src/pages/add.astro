@@ -1,0 +1,15 @@
+---
+import Layout from '../layouts/Layout.astro';
+import QuoteForm from '../components/QuoteForm.astro';
+import type { QuoteFormData } from '../components/QuoteForm.astro';
+
+let formData: QuoteFormData = {};
+let saveError = false;
+---
+
+<Layout title="Add a movie quote" page="add">
+  <main>
+    <h2>Add a quote</h2>
+    <QuoteForm action="/add" values={formData} saveError={saveError} submitLabel="Add quote" />
+  </main>
+</Layout>
