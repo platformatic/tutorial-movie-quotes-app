@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import QuoteActionEdit from '../components/QuoteActionEdit.astro';
 import { quotesApi, gql } from '../lib/quotes-api';
 
 const { data } = await quotesApi.query(gql`
@@ -31,7 +32,10 @@ const quotes = data?.quotes || [];
           — {quote.saidBy}, {quote.movie?.name}
         </p>
         <div class="flex flex-col mb-6 text-gray-400">
-          <span class="text-gray-400 italic">Added {new Date(quote.createdAt).toUTCString()}</span>
+          <span class="flex items-center">
+            <QuoteActionEdit id={quote.id} />
+          </span>
+          <span class="mt-4 text-gray-400 italic">Added {new Date(quote.createdAt).toUTCString()}</span>
         </div>
       </div>
     )) : (
