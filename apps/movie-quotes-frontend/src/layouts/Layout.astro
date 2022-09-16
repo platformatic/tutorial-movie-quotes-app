@@ -22,6 +22,7 @@ const navActiveClasses = "font-bold bg-yellow-400 no-underline";
     </header>
     <nav class="prose mx-auto mb-6 border-y border-gray-200 flex">
       <a href="/" class={`p-3 ${page === "listing" && navActiveClasses}`}>All quotes</a>
+      <a href="/add" class={`p-3 ${page === "add" && navActiveClasses}`}>Add a quote</a>
     </nav>
     <section class="prose mx-auto">
       <slot />
