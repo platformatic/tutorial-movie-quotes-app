@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import QuoteActionEdit from '../components/QuoteActionEdit.astro';
+import QuoteActionDelete from '../components/QuoteActionDelete.astro';
 import { quotesApi, gql } from '../lib/quotes-api';
 
 const { data } = await quotesApi.query(gql`
@@ -34,6 +35,7 @@ const quotes = data?.quotes || [];
         <div class="flex flex-col mb-6 text-gray-400">
           <span class="flex items-center">
             <QuoteActionEdit id={quote.id} />
+            <QuoteActionDelete id={quote.id} />
           </span>
           <span class="mt-4 text-gray-400 italic">Added {new Date(quote.createdAt).toUTCString()}</span>
         </div>
@@ -43,3 +45,16 @@ const quotes = data?.quotes || [];
     )}
   </main>
 </Layout>
+
+<script>
+  import { confirmDeleteQuote } from '../scripts/quote-actions.js'
+
+  addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.form-delete-quote').forEach((deleteForm) => {
+      deleteForm.addEventListener('submit', (event) => {
+        event.preventDefault()
+        confirmDeleteQuote(event.currentTarget)
+      })
+    })
+  })
+</script>
