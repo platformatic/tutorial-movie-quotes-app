@@ -1,4 +1,6 @@
 ---
+import { quotesApi, gql } from '../lib/quotes-api.js';
+
 export interface QuoteFormData {
   id?: number;
   quote?: string;
@@ -15,6 +17,16 @@ export interface Props {
 }
 
 const { action, values = {}, saveError, loadError, submitLabel } = Astro.props;
+
+const { data } = await quotesApi.query(gql`
+  query {
+    movies {
+      name
+    }
+  }
+`);
+
+const movies = data?.movies || [];
 ---
 
 {saveError && <p class="text-lg bg-red-200 p-4">There was an error saving the quote. Please try again.</p>}
@@ -31,7 +43,12 @@ const { action, values = {}, saveError, loadError, submitLabel } = Astro.props;
   </label>
   <label for="movie" class="block">
     <span>Movie</span>
-    <input type="text" id="movie" name="movie" required="required" autocomplete="off" value={values.movie} class="form-input mt-1 w-full">
+    <input list="movies" id="movie" name="movie" required="required" autocomplete="off" value={values.movie} class="form-input mt-1 w-full">
+    <datalist id="movies">
+      {movies.map(({ name }) => (
+        <option>{name}</option>
+      ))}
+    </datalist>
   </label>
   <input type="submit" value={submitLabel} disabled={loadError && "disabled"} class="bg-yellow-400 hover:bg-yellow-500 text-gray-900 round p-3" />
 </form>
