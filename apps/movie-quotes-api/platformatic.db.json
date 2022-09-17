@@ -11,5 +11,8 @@
   },
   "migrations": {
     "dir": "./migrations"
+  },
+  "plugin": {
+    "path": "./plugin.js"
   }
 }
