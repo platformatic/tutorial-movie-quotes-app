@@ -12,6 +12,7 @@
   "license": "UNLICENSED",
   "description": "",
   "dependencies": {
-    "platformatic": "^0.0.23"
+    "platformatic": "^0.0.23",
+    "fluent-json-schema": "^3.1.0"
   }
 }
