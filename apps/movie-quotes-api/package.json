@@ -12,6 +12,7 @@
   "license": "UNLICENSED",
   "description": "",
   "dependencies": {
-    "@platformatic/cli": "file:../../../platformatic-private/packages/cli"
+    "@platformatic/cli": "file:../../../platformatic-private/packages/cli",
+    "fluent-json-schema": "^3.1.0"
   }
 }
