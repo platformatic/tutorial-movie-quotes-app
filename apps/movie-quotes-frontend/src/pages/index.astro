@@ -5,9 +5,13 @@ import QuoteActionDelete from '../components/QuoteActionDelete.astro';
 import QuoteActionLike from '../components/QuoteActionLike.astro';
 import { quotesApi, gql } from '../lib/quotes-api';
 
+const allowedSortFields = ["createdAt", "likes"];
+const searchParamSort = new URL(Astro.request.url).searchParams.get("sort");
+const sort = allowedSortFields.includes(searchParamSort) ? searchParamSort : "createdAt";
+
 const { data } = await quotesApi.query(gql`
   query {
-    quotes {
+    quotes(orderBy: {field: ${sort}, direction: DESC}) {
       id
       quote
       saidBy
@@ -24,7 +28,7 @@ const { data } = await quotesApi.query(gql`
 const quotes = data?.quotes || [];
 ---
 
-<Layout title="All quotes" page="listing">
+<Layout title="All quotes" page={`listing-${sort}`}>
   <main>
     {quotes.length > 0 ? quotes.map((quote) => (
       <div class="border-b mb-6">
