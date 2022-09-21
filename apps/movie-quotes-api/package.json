@@ -1,0 +1,17 @@
+{
+  "name": "movie-quotes-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "platformatic db start",
+    "dev": "npm start"
+  },
+  "keywords": [],
+  "author": "Simon Plenderleith <simon@simonplend.co.uk> (https://simonplend.com/)",
+  "license": "UNLICENSED",
+  "description": "",
+  "dependencies": {
+    "platformatic": "^0.0.23"
+  }
+}
