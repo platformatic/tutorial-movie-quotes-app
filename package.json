@@ -1,25 +1,25 @@
 {
   "name": "tutorial-movie-quotes-app",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "private": true,
   "scripts": {
-    "test": "standard | snazzy"
+    "setup": "npm run apps:install && npm run apps:setup",
+    "apps:install": "npm install --prefix apps/movie-quotes-api && npm install --prefix apps/movie-quotes-frontend",
+    "apps:setup": "npm run setup --prefix apps/movie-quotes-api && npm run setup --prefix apps/movie-quotes-frontend",
+    "test": "standard | snazzy",
+    "dev": "concurrently -n api,frontend 'npm run dev --prefix apps/movie-quotes-api' 'npm run dev --prefix apps/movie-quotes-frontend'"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/platformatic/tutorial-movie-quotes-app.git"
   },
-  "keywords": [],
   "author": "Simon Plenderleith <simon@simonplend.co.uk> (https://simonplend.com/)",
-  "license": "UNLICENSED",
   "bugs": {
     "url": "https://github.com/platformatic/tutorial-movie-quotes-app/issues"
   },
   "homepage": "https://github.com/platformatic/tutorial-movie-quotes-app#readme",
-  "private": true,
   "devDependencies": {
     "@fastify/pre-commit": "^2.0.2",
+    "concurrently": "^7.4.0",
     "snazzy": "^9.0.0",
     "standard": "^17.0.0"
   }
