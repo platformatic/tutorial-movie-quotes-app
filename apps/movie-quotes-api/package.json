@@ -1,16 +1,12 @@
 {
   "name": "movie-quotes-api",
-  "version": "1.0.0",
-  "main": "index.js",
   "scripts": {
+    "setup": "cp .env.example .env && platformatic db seed seed.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "platformatic db start",
     "dev": "npm start"
   },
-  "keywords": [],
   "author": "Simon Plenderleith <simon@simonplend.co.uk> (https://simonplend.com/)",
-  "license": "UNLICENSED",
-  "description": "",
   "dependencies": {
     "platformatic": "^0.0.23",
     "fluent-json-schema": "^3.1.0"

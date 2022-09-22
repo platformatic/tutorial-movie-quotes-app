@@ -1,16 +1,12 @@
 {
   "name": "movie-quotes-frontend",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
   "scripts": {
+    "setup": "cp .env.example .env",
     "dev": "astro dev --port 3000",
     "start": "astro dev --port 3000",
     "build": "astro build"
   },
-  "keywords": [],
   "author": "Simon Plenderleith <simon@simonplend.co.uk> (https://simonplend.com/)",
-  "license": "UNLICENSED",
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.3",
     "@tailwindcss/typography": "^0.5.7",
