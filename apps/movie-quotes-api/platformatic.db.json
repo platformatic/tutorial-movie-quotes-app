@@ -1,7 +1,10 @@
 {
   "server": {
     "logger": {
-      "level": "{PLT_SERVER_LOGGER_LEVEL}"
+      "level": "{PLT_SERVER_LOGGER_LEVEL}",
+      "transport": {
+        "target": "pino-pretty"
+      }
     },
     "hostname": "{PLT_SERVER_HOSTNAME}",
     "port": "{PORT}",
