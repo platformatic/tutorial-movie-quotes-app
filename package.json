@@ -3,10 +3,10 @@
   "private": true,
   "scripts": {
     "setup": "npm run apps:install && npm run apps:setup",
-    "apps:install": "npm install --prefix apps/movie-quotes-api && npm install --prefix apps/movie-quotes-frontend",
-    "apps:setup": "npm run setup --prefix apps/movie-quotes-api && npm run setup --prefix apps/movie-quotes-frontend",
+    "apps:install": "npm install --prefix apps/movie-quotes-api && yarn --cwd apps/movie-quotes-admin install && npm install --prefix apps/movie-quotes-frontend",
+    "apps:setup": "npm run setup --prefix apps/movie-quotes-api && yarn --cwd apps/movie-quotes-admin run setup && npm run setup --prefix apps/movie-quotes-frontend",
     "test": "standard | snazzy",
-    "dev": "concurrently -n api,frontend 'npm run dev --prefix apps/movie-quotes-api' 'npm run dev --prefix apps/movie-quotes-frontend'"
+    "dev": "concurrently -n api,admin,frontend 'npm run dev --prefix apps/movie-quotes-api' 'yarn --cwd apps/movie-quotes-admin start' 'npm run dev --prefix apps/movie-quotes-frontend'"
   },
   "repository": {
     "type": "git",

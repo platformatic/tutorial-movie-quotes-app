@@ -9,7 +9,11 @@
     "hostname": "{PLT_SERVER_HOSTNAME}",
     "port": "{PORT}",
     "cors": {
-      "origin": "{PLT_SERVER_CORS_ORIGIN}"
+      "origin": true,
+      "exposedHeaders": [
+        "Content-Range",
+        "X-Total-Count"
+      ]
     }
   },
   "core": {
