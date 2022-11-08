@@ -10,6 +10,6 @@
   "author": "Simon Plenderleith <simon@simonplend.co.uk> (https://simonplend.com/)",
   "dependencies": {
     "platformatic": "^0.5.0",
-    "fluent-json-schema": "^3.1.0"
+    "fluent-json-schema": "^4.0.0"
   }
 }
