@@ -9,11 +9,18 @@
     "hostname": "{PLT_SERVER_HOSTNAME}",
     "port": "{PORT}",
     "cors": {
-      "origin": "{PLT_SERVER_CORS_ORIGIN}"
+      "origin": "{PLT_SERVER_CORS_ORIGIN}",
+      "exposedHeaders": [
+        "Content-Range",
+        "X-Total-Count"
+      ]
     }
   },
   "core": {
     "connectionString": "{DATABASE_URL}"
+  },
+  "dashboard": {
+    "rootPath": true
   },
   "migrations": {
     "dir": "./migrations"

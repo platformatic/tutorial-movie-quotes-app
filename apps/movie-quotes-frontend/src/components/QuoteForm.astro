@@ -3,7 +3,7 @@ import { quotesApi, gql } from '../lib/quotes-api.js';
 
 export interface QuoteFormData {
   id?: number;
-  quote?: string;
+  quoteText?: string;
   saidBy?: string;
   movie?: string;
 }
@@ -33,9 +33,9 @@ const movies = data?.movies || [];
 {loadError && <p class="text-lg bg-red-200 p-4">There was an error loading the quote. Please try again.</p>}
 
 <form method="post" action={action} class="grid grid-cols-1 gap-6">
-  <label for="quote" class="block">
+  <label for="quoteText" class="block">
     <span>Quote</span>
-    <textarea id="quote" name="quote" required="required" class="mt-1 w-full">{values.quote}</textarea>
+    <textarea id="quoteText" name="quoteText" required="required" class="mt-1 w-full">{values.quoteText}</textarea>
   </label>
   <label for="said-by" class="block">
     <span>Said by</span>

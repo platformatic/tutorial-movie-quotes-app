@@ -20,7 +20,7 @@ if (isPostRequest(Astro.request)) {
   if (movieId) {
     const quote = {
       id,
-      quote: formData.quote,
+      quoteText: formData.quoteText,
       saidBy: formData.saidBy,
       movieId,
     };
@@ -46,7 +46,7 @@ if (isPostRequest(Astro.request)) {
     query($id: ID!) {
       getQuoteById(id: $id) {
         id
-        quote
+        quoteText
         saidBy
         movie {
           id
