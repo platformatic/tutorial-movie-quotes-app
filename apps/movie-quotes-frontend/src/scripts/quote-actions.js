@@ -1,7 +1,7 @@
+/* global confirm */
 import { quotesApi, gql } from '../lib/quotes-api.js'
 
 export function confirmDeleteQuote (form) {
-  // eslint-disable-next-line no-undef
   if (confirm('Are you sure want to delete this quote?')) {
     form.submit()
   }
