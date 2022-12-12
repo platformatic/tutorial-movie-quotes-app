@@ -1,3 +1,4 @@
+/* global confirm */
 import { quotesApi, gql } from '../lib/quotes-api.js'
 
 export function confirmDeleteQuote (form) {
