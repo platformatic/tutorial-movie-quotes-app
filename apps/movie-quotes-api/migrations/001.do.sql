@@ -1,6 +1,6 @@
 CREATE TABLE quotes (
   id INTEGER PRIMARY KEY,
-  quote TEXT NOT NULL,
+  quote_text TEXT NOT NULL,
   said_by VARCHAR(255) NOT NULL,
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
