@@ -16,7 +16,8 @@
     "connectionString": "{DATABASE_URL}"
   },
   "migrations": {
-    "dir": "./migrations"
+    "dir": "./migrations",
+    "autoApply": true
   },
   "plugin": {
     "path": "./plugin.js"

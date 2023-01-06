@@ -44,7 +44,7 @@ const quotes = data?.quotes || [];
             <QuoteActionEdit id={quote.id} />
             <QuoteActionDelete id={quote.id} />
           </span>
-          <span class="mt-4 text-gray-400 italic">Added {new Date(quote.createdAt).toUTCString()}</span>
+          <span class="mt-4 text-gray-400 italic">Added {new Date(Number(quote.createdAt)).toUTCString()}</span>
         </div>
       </div>
     )) : (
