@@ -2,14 +2,14 @@
   "name": "movie-quotes-api",
   "scripts": {
     "clean": "rm -f *.sqlite",
-    "setup": "npm run clean && cp .env.example .env && platformatic db seed seed.js",
+    "setup": "npm run clean && cp .env.example .env && npx platformatic db migrations apply && platformatic db seed seed.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "platformatic db start",
     "dev": "npm start"
   },
   "author": "Simon Plenderleith <simon@simonplend.co.uk> (https://simonplend.com/)",
   "dependencies": {
-    "platformatic": "^0.12.0",
-    "fluent-json-schema": "^4.0.0"
+    "fluent-json-schema": "^4.0.0",
+    "platformatic": "^0.15.1"
   }
 }
