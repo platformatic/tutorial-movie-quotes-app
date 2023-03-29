@@ -19,7 +19,7 @@
   "homepage": "https://github.com/platformatic/tutorial-movie-quotes-app#readme",
   "devDependencies": {
     "@fastify/pre-commit": "^2.0.2",
-    "concurrently": "^7.4.0",
+    "concurrently": "^8.0.0",
     "snazzy": "^9.0.0",
     "standard": "^17.0.0"
   }
