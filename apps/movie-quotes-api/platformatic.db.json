@@ -12,14 +12,21 @@
       "origin": "{PLT_SERVER_CORS_ORIGIN}"
     }
   },
-  "core": {
-    "connectionString": "{DATABASE_URL}"
+  "db": {
+    "connectionString": "{DATABASE_URL}",
+    "graphiql": true,
+    "openapi": true,
+    "ignore": {
+      "versions": true
+    }
   },
   "migrations": {
     "dir": "./migrations",
-    "autoApply": true
+    "table": "versions"
   },
-  "plugin": {
-    "path": "./plugin.js"
+  "plugins": {
+    "paths": [
+      "plugin.js"
+    ]
   }
 }
