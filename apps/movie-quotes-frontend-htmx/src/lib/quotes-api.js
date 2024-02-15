@@ -1,15 +1,15 @@
-import { createClient, gql, cacheExchange, fetchExchange } from '@urql/core'
+import { cacheExchange, createClient, fetchExchange, gql } from '@urql/core'
 
 const graphqlClient = createClient({
   url: import.meta.env.PUBLIC_GRAPHQL_API_ENDPOINT,
   requestPolicy: 'network-only',
-  exchanges: [cacheExchange, fetchExchange]
+  exchanges: [cacheExchange, fetchExchange],
 })
 
-async function graphqlClientWrapper (method, gqlQuery, queryVariables = {}) {
+async function graphqlClientWrapper(method, gqlQuery, queryVariables = {}) {
   const queryResult = await graphqlClient[method](
     gqlQuery,
-    queryVariables
+    queryVariables,
   ).toPromise()
 
   if (queryResult.error) {
@@ -18,12 +18,12 @@ async function graphqlClientWrapper (method, gqlQuery, queryVariables = {}) {
 
   return {
     data: queryResult.data,
-    error: queryResult.error
+    error: queryResult.error,
   }
 }
 
-async function getMovieId (movieName) {
-  movieName = movieName.trim()
+async function getMovieId(inputMovieName) {
+  const movieName = inputMovieName.trim()
 
   let movieId = null
 
@@ -36,7 +36,7 @@ async function getMovieId (movieName) {
         }
       }
     `,
-    { movieName }
+    { movieName },
   )
 
   if (queryMoviesResult.error) {
@@ -56,7 +56,7 @@ async function getMovieId (movieName) {
           }
         }
       `,
-      { movieName }
+      { movieName },
     )
 
     if (saveMovieResult.error) {
@@ -70,13 +70,13 @@ async function getMovieId (movieName) {
 }
 
 export const quotesApi = {
-  async query (gqlQuery, queryVariables = {}) {
+  async query(gqlQuery, queryVariables = {}) {
     return await graphqlClientWrapper('query', gqlQuery, queryVariables)
   },
-  async mutation (gqlQuery, queryVariables = {}) {
+  async mutation(gqlQuery, queryVariables = {}) {
     return await graphqlClientWrapper('mutation', gqlQuery, queryVariables)
   },
-  getMovieId
+  getMovieId,
 }
 
 export { gql } from '@urql/core'
