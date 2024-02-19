@@ -1,3 +1,5 @@
+import { Suspense } from '@kitajs/html/suspense.js'
+
 const navActiveClasses = 'font-bold bg-yellow-400 no-underline'
 
 export default ({ req, children }) => {
@@ -9,17 +11,17 @@ export default ({ req, children }) => {
       <nav class="prose mx-auto mb-6 border-y border-gray-200 flex">
         <a
           href="/?sort=createdAt"
-          class={`p-3 ${page === 'listing-createdAt' && navActiveClasses}`}
+          class={`p-3 ${req.page === 'listing-createdAt' && navActiveClasses}`}
         >
           Latest quotes
         </a>
         <a
           href="/?sort=likes"
-          class={`p-3 ${page === 'listing-likes' && navActiveClasses}`}
+          class={`p-3 ${req.page === 'listing-likes' && navActiveClasses}`}
         >
           Top quotes
         </a>
-        <a href="/add" class={`p-3 ${page === 'add' && navActiveClasses}`}>
+        <a href="/add" class={`p-3 ${req.page === 'add' && navActiveClasses}`}>
           Add a quote
         </a>
       </nav>

@@ -6,7 +6,7 @@ export interface Props extends Html.PropsWithChildren {
 
 export default ({ id }: Props) => {
   return (
-    <form method="POST" action={`/delete/${id}`} class="form-delete-quote m-0">
+    <form method="POST" action={`/delete/${id}`} class="m-0" data-form-delete-quote>
       <button
         type="submit"
         class="flex items-center text-gray-400 hover:text-red-700 underline decoration-red-700 decoration-2 underline-offset-4"

@@ -1,7 +1,5 @@
 import './index.client.js'
-
-import QuoteListing from '/fragments/QuoteActionListing.tsx'
-import { gql, quotesApi } from '/lib/quotes-api'
+import QuoteListing from '/fragments/QuoteListing.tsx'
 
 export const path = '/'
 

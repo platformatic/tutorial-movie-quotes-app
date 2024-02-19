@@ -23,6 +23,6 @@ export async function likeQuote(likeQuote) {
   )
 
   if (data?.likeQuote) {
-    likeQuote.querySelector('.likes-count').innerText = data.likeQuote
+    likeQuote.querySelector('[data-likes-count]').innerText = data.likeQuote
   }
 }

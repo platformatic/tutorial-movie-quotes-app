@@ -1,1 +1,4 @@
-QuoteActionLike.module.css
+.like-quote:hover .like-icon,
+.like-quote.liked .like-icon {
+  fill: currentColor;
+}

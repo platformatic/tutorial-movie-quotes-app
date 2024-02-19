@@ -1,0 +1,4 @@
+{
+  "name": "quotes",
+  "types": "./quotes.d.ts"
+}

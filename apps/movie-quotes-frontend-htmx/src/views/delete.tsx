@@ -1,5 +1,5 @@
-import { gql, quotesApi } from '/lib/quotes-api'
-import { isPostRequest } from '/lib/request-utils'
+import { gql, quotesApi } from '/lib/quotes-api.js'
+import { isPostRequest } from '/lib/request-utils.js'
 
 export const path = '/delete/:id'
 

@@ -1,7 +1,7 @@
 import { cacheExchange, createClient, fetchExchange, gql } from '@urql/core'
 
 const graphqlClient = createClient({
-  url: import.meta.env.PUBLIC_GRAPHQL_API_ENDPOINT,
+  url: import.meta.env.VITE_GRAPHQL_API_ENDPOINT,
   requestPolicy: 'network-only',
   exchanges: [cacheExchange, fetchExchange],
 })

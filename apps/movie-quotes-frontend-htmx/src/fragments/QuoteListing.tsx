@@ -1,9 +1,13 @@
-import Html from '@kitajs/html'
+import { gql, quotesApi } from '/lib/quotes-api'
+import QuoteActionLike from '/components/QuoteActionLike.tsx'
+import QuoteActionEdit from '/components/QuoteActionEdit.tsx'
+import QuoteActionDelete from '/components/QuoteActionDelete.tsx'
 
 export const path = '/html/quotes'
 export const fragment = true
 
 export default async ({ req }) => {
+  try {
   const allowedSortFields = ['createdAt', 'likes']
   const searchParamSort = req.query.sort
   const sort = allowedSortFields.includes(searchParamSort)
@@ -57,4 +61,7 @@ export default async ({ req }) => {
       )}
     </main>
   )
+  } catch (error) {
+    console.log(error)
+  }
 }

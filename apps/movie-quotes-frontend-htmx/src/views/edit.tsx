@@ -1,7 +1,7 @@
-import QuoteForm, { QuoteFormData } from '../../components/QuoteForm.tsx'
+import QuoteForm, { QuoteFormData } from '/components/QuoteForm.tsx'
 
-import { gql, quotesApi } from '../../lib/quotes-api'
-import { getFormData, isPostRequest } from '../../lib/request-utils'
+import { gql, quotesApi } from '/lib/quotes-api.js'
+import { getFormData, isPostRequest } from '/lib/request-utils.js'
 
 export const path = '/edit/:id'
 

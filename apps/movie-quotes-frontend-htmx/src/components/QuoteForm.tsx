@@ -1,5 +1,5 @@
 import Html from '@kitajs/html'
-import { gql, quotesApi } from '../lib/quotes-api.js'
+import { gql, quotesApi } from '/lib/quotes-api.js'
 
 export interface Props extends Html.PropsWithChildren {
   action: string
