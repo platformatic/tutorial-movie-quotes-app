@@ -1,10 +1,11 @@
 import QuoteForm from '/components/QuoteForm.tsx'
 import type { QuoteFormData } from '/components/QuoteForm.tsx'
 
-import { gql, quotesApi } from '/lib/quotes-api'
-import { getFormData, isPostRequest } from '/lib/request-utils'
+import { getMovieId } from '/lib/quotes-api'
+import { isPostRequest } from '/lib/request-utils'
 
 export const path = '/add'
+export const method = ['GET', 'POST']
 
 export const head = (
   <>
@@ -12,49 +13,55 @@ export const head = (
   </>
 )
 
-export default async ({ req, reply }) => {
-  let formData: QuoteFormData = {}
-  let saveError = false
+export async function preHandler (req, reply) {
+  const formData: QuoteFormData = {}
+  req.formData = formData
+  req.saveError = false
 
   if (isPostRequest(req)) {
-    formData = await getFormData(req)
+    req.formData = req.body
+    const movieId = await getMovieId(req, req.formData.movie)
 
-    const movieId = await quotesApi.getMovieId(formData.movie)
+    if (!movieId) {
+      req.saveError = true
+    }
+    const quote = {
+      quote: req.formData.quote,
+      saidBy: req.formData.saidBy,
+      movieId,
+    }
 
-    if (movieId) {
-      const quote = {
-        quote: formData.quote,
-        saidBy: formData.saidBy,
-        movieId,
-      }
-
-      const { error } = await quotesApi.mutation(
-        gql`
-        mutation($quote: QuoteInput!) {
-          saveQuote(input: $quote) {
-            id
+    try {
+      await req.quotes.graphql({
+        query: `
+          mutation($quote: QuoteInput!) {
+            saveQuote(input: $quote) {
+              id
+            }
           }
-        }
-      `,
-        { quote },
-      )
-
-      if (!error) {
-        return reply.redirect('/')
-      }
-      saveError = true
-    } else {
-      saveError = true
+        `,
+        variables: { quote },
+      })
+    } catch (error) {
+      console.error(error)
+      req.saveError = true
     }
   }
-  req.page = 'Add'
+  if (!req.saveError) {
+    return reply.redirect('/')
+  }
+  req.page = 'add'
+}
+
+export default async ({ req, reply }) => {
   return (
     <main>
       <h2>Add a quote</h2>
       <QuoteForm
+        req={req}
         action="/add"
-        values={formData}
-        saveError={saveError}
+        values={req.formData}
+        saveError={req.saveError}
         submitLabel="Add quote"
       />
     </main>

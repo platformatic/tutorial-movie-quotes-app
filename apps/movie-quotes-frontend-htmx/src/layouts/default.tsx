@@ -1,4 +1,5 @@
 import { Suspense } from '@kitajs/html/suspense.js'
+import { ErrorBoundary } from '@kitajs/html/error-boundary.js'
 
 const navActiveClasses = 'font-bold bg-yellow-400 no-underline'
 

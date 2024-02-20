@@ -1,4 +1,3 @@
-import './index.client.js'
 import QuoteListing from '/fragments/QuoteListing.tsx'
 
 export const path = '/'

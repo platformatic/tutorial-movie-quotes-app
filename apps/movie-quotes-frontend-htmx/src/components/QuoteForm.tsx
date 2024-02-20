@@ -17,21 +17,22 @@ export interface QuoteFormData {
 }
 
 export default async ({
+  req,
   action,
   values = {},
   saveError,
   loadError,
   submitLabel,
 }: Props) => {
-  const { data } = await quotesApi.query(gql`
-    query {
-      movies {
-        name
+  const movies = await req.quotes.graphql({
+    query: `
+      query {
+        movies {
+          name
+        }
       }
-    }
-  `)
-
-  const movies = data?.movies || []
+    `,
+  })
 
   return (
     <>

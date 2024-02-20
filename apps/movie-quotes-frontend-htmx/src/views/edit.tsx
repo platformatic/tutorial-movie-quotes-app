@@ -1,9 +1,10 @@
 import QuoteForm, { QuoteFormData } from '/components/QuoteForm.tsx'
 
-import { gql, quotesApi } from '/lib/quotes-api.js'
-import { getFormData, isPostRequest } from '/lib/request-utils.js'
+import { getMovieId } from '/lib/quotes-api.js'
+import { isPostRequest } from '/lib/request-utils.js'
 
 export const path = '/edit/:id'
+export const method = ['GET', 'POST']
 
 export const head = (
   <>
@@ -11,80 +12,93 @@ export const head = (
   </>
 )
 
-export default async ({ req, reply }) => {
-  const id = Number(req.params.id)
+export const decorateRequest = [
+  'formValues',
+  'loadError',
+  'saveError',
+  'quoteId'
+]
 
-  let formValues: QuoteFormData = {}
-  let loadError = false
-  let saveError = false
+export async function preHandler (req, reply) {
+  req.movieId = Number(req.params.id)
+  const formData: QuoteFormData = {}
+  req.formValues = formData;
+  req.loadError = false
+  req.saveError = false
 
   if (isPostRequest(req)) {
-    const formData = await getFormData(req)
-    formValues = formData
-
-    const movieId = await quotesApi.getMovieId(formData.movie)
+    req.formData = req.body
+    req.movieId = await getMovieId(req, formData.movie)
 
     if (movieId) {
       const quote = {
-        id,
+        id: req.movieId,
         quote: formData.quote,
         saidBy: formData.saidBy,
         movieId,
       }
 
-      const { error } = await quotesApi.mutation(
-        gql`
-        mutation($quote: QuoteInput!) {
-          saveQuote(input: $quote) {
-            id
-          }
-        }
-      `,
-        { quote },
-      )
-
-      if (!error) {
-        return reply.redirect('/')
+      try {
+        await req.quotes.graphql({
+          query: `
+            mutation($quote: QuoteInput!) {
+              saveQuote(input: $quote) {
+                id
+              }
+            }
+          `,
+          variables: { quote },
+        })
+      } catch (error) {
+        console.log(error)
+        req.saveError = true
       }
-      saveError = true
     } else {
-      saveError = true
+      req.saveError = true
     }
+    reply.redirect('/')
   } else {
-    const { data } = await quotesApi.query(
-      gql`
-      query($id: ID!) {
-        getQuoteById(id: $id) {
-          id
-          quote
-          saidBy
-          movie {
-            id
-            name
+    let data
+    try { 
+      data = await req.quotes.graphql({
+        query: `
+          query($id: ID!) {
+            getQuoteById(id: $id) {
+              id
+              quote
+              saidBy
+              movie {
+                id
+                name
+              }
+            }
           }
-        }
-      }
-    `,
-      { id },
-    )
+        `,
+        variables: { id: req.movieId },
+      })
+    } catch {
+      req.loadError = true
+    }
 
-    if (data?.getQuoteById) {
-      formValues = {
-        ...data.getQuoteById,
-        movie: data.getQuoteById.movie.name,
+    if (data) {
+      req.formValues = {
+        ...data,
+        movie: data.movie.name,
       }
-    } else {
-      loadError = true
     }
   }
+}
+
+export default async ({ req, reply }) => {
   return (
     <main>
       <h2>Edit quote</h2>
       <QuoteForm
-        action={`/edit/${id}`}
-        values={formValues}
-        saveError={saveError}
-        loadError={loadError}
+        req={req}
+        action={`/edit/${req.quoteId}`}
+        values={req.formValues}
+        saveError={req.saveError}
+        loadError={req.loadError}
         submitLabel="Update quote"
       />
     </main>

@@ -3,5 +3,5 @@ module.exports = {
     'tailwindcss/nesting': 'postcss-nesting',
     tailwindcss: {},
     'postcss-preset-env': { stage: 1 },
-  }
+  },
 }

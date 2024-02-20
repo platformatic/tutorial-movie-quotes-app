@@ -3,7 +3,7 @@
 const pltClient = require('@platformatic/client')
 const { join } = require('path')
 
-async function generateQuotesClientPlugin (app, opts) {
+async function generateQuotesClientPlugin(app, opts) {
   const url = new URL(opts.url)
   url.pathname = '/graphql'
   app.register(pltClient, {
@@ -11,12 +11,12 @@ async function generateQuotesClientPlugin (app, opts) {
     name: 'quotes',
     path: join(__dirname, 'quotes.schema.graphql'),
     serviceId: opts.serviceId,
-    url: url.toString()
+    url: url.toString(),
   })
 }
 
 generateQuotesClientPlugin[Symbol.for('plugin-meta')] = {
-  name: 'quotes GraphQL Client'
+  name: 'quotes GraphQL Client',
 }
 generateQuotesClientPlugin[Symbol.for('skip-override')] = true
 

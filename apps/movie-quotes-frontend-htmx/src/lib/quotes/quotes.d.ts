@@ -1,4 +1,4 @@
-import { type FastifyReply, type FastifyPluginAsync } from 'fastify'
+import { type FastifyPluginAsync, type FastifyReply } from 'fastify'
 
 type QuotesPlugin = FastifyPluginAsync<NonNullable<Quotes.QuotesOptions>>
 
@@ -15,14 +15,14 @@ declare module 'fastify' {
     async getHeaders(req: FastifyRequest, reply: FastifyReply): Promise<Record<string,string>>;
   }
   interface FastifyInstance {
-    'quotes'
+    quotes
     : GraphQLClient;
 
     configureQuotes(opts: ConfigureQuotes): unknown
   }
 
   interface FastifyRequest {
-    'quotes'
+    quotes
     : GraphQLClient;
 
   }
@@ -33,41 +33,41 @@ declare namespace quotes {
     url: string
   }
   export interface Quote {
-    'id'?: string;
+    id?: string;
 
-    'quote'?: string;
+    quote?: string;
 
-    'saidBy'?: string;
+    saidBy?: string;
 
-    'createdAt'?: string;
+    createdAt?: string;
 
-    'likes'?: number;
+    likes?: number;
 
-    'movie'?: Movie;
+    movie?: Movie;
 
   }
   export interface Movie {
-    'id'?: string;
+    id?: string;
 
-    'name'?: string;
+    name?: string;
 
-    'quotes'?: Array<Quote>;
+    quotes?: Array<Quote>;
 
   }
   export interface QuotesCount {
-    'total'?: number;
+    total?: number;
 
   }
   export interface MoviesCount {
-    'total'?: number;
+    total?: number;
 
   }
   export interface QuoteDeleted {
-    'id'?: string;
+    id?: string;
 
   }
   export interface MovieDeleted {
-    'id'?: string;
+    id?: string;
 
   }
   export const quotes: QuotesPlugin;

@@ -1,7 +1,7 @@
-import { gql, quotesApi } from '/lib/quotes-api.js'
 import { isPostRequest } from '/lib/request-utils.js'
 
 export const path = '/delete/:id'
+export const method = ['POST']
 
 export const head = (
   <>
@@ -9,23 +9,28 @@ export const head = (
   </>
 )
 
-export default async ({ req, reply }) => {
+export async function preHandler (req, reply) {
   if (isPostRequest(req)) {
     const id = Number(req.params.id)
-    const { error } = await quotesApi.mutation(
-      gql`
-      mutation($id: ID!) {
-        deleteQuotes(where: { id: { eq: $id }}) {
-          id
-        }
-      }
-    `,
-      { id },
-    )
-    if (!error) {
-      reply.redirect('/')
+    try {
+      await req.quotes.graphql({
+        query: `
+          mutation($id: ID!) {
+            deleteQuotes(where: { id: { eq: $id }}) {
+              id
+            }
+          }
+        `,
+        variables: { id },
+      })
+      reply.send('')
+    } catch (error) {
+      console.log(error)
     }
   }
+}
+
+export default async ({ req, reply }) => {
   return (
     <main>
       <h2>Delete quote</h2>

@@ -1,43 +1,42 @@
-import { gql, quotesApi } from '/lib/quotes-api'
-import QuoteActionLike from '/components/QuoteActionLike.tsx'
-import QuoteActionEdit from '/components/QuoteActionEdit.tsx'
 import QuoteActionDelete from '/components/QuoteActionDelete.tsx'
+import QuoteActionEdit from '/components/QuoteActionEdit.tsx'
+import QuoteActionLike from '/components/QuoteActionLike.tsx'
 
 export const path = '/html/quotes'
 export const fragment = true
 
 export default async ({ req }) => {
-  try {
   const allowedSortFields = ['createdAt', 'likes']
   const searchParamSort = req.query.sort
   const sort = allowedSortFields.includes(searchParamSort)
     ? searchParamSort
     : 'createdAt'
 
-  const { data } = await quotesApi.query(gql`
-    query {
-      quotes(orderBy: {field: ${sort}, direction: DESC}) {
-        id
-        quote
-        saidBy
-        likes
-        createdAt
-        movie {
+  const quotes = await req.quotes.graphql({
+    query: `
+      query {
+        quotes(orderBy: {field: ${sort}, direction: DESC}) {
           id
-          name
+          quote
+          saidBy
+          likes
+          createdAt
+          movie {
+            id
+            name
+          }
         }
       }
-    }
-  `)
+    `,
+  })
 
-  const quotes = data?.quotes || []
   req.page = `listing-${sort}`
 
   return (
     <main>
       {quotes.length > 0 ? (
         quotes.map((quote) => (
-          <div class="border-b mb-6">
+          <div class="border-b mb-6" class="quote">
             <blockquote class="text-2xl mb-0">
               <p class="mb-4">{quote.quote}</p>
             </blockquote>
@@ -51,7 +50,7 @@ export default async ({ req }) => {
                 <QuoteActionDelete id={quote.id} />
               </span>
               <span class="mt-4 text-gray-400 italic">
-                Added {new Date(Number(quote.createdAt)).toUTCString()}
+                Added {new Date(quote.createdAt).toUTCString()}
               </span>
             </div>
           </div>
@@ -61,7 +60,4 @@ export default async ({ req }) => {
       )}
     </main>
   )
-  } catch (error) {
-    console.log(error)
-  }
 }

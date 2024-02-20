@@ -7,7 +7,7 @@
     "start": "node server.js",
     "build": "npm run build:client && npm run build:server",
     "build:client": "vite build --outDir dist/client --ssrManifest",
-    "build:server": "vite build --outDir dist/server --ssr /index.jsx",
+    "build:server": "vite build --outDir dist/server --ssr /index.js",
     "lint": "biome check --apply-unsafe ."
   },
   "author": "Simon Plenderleith <simon@simonplend.co.uk> (https://simonplend.com/)",
@@ -25,9 +25,9 @@
   },
   "dependencies": {
     "@fastify/formbody": "^7.4.0",
-    "@fastify/htmx": "0.1.0",
+    "@fastify/htmx": "0.2.0",
     "@fastify/one-line-logger": "^1.2.0",
-    "@fastify/vite": "^6.0.0",
+    "@fastify/vite": "^6.0.2",
     "@kitajs/html": "^3.1.2",
     "@platformatic/client": "^1.23.0",
     "@urql/core": "^4.0.10",
