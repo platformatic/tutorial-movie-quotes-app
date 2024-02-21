@@ -16,8 +16,6 @@ const server = Fastify({
 
 await server.register(FastifyFormBody)
 
-console.log(process.env.VITE_GRAPHQL_API_ENDPOINT)
-
 await server.register(quotesGraphQLClient, {
   url: process.env.VITE_GRAPHQL_API_ENDPOINT,
 })
@@ -33,7 +31,7 @@ server.post('/api/like-movie-quote/:id', async (req, reply) => {
     variables: { id },
   })
   reply.type('text/plain')
-  reply.send(liked)
+  reply.send(liked.toString())
 })
 
 await server.register(FastifyVite, {
