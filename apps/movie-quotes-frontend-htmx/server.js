@@ -16,6 +16,8 @@ const server = Fastify({
 
 await server.register(FastifyFormBody)
 
+console.log(process.env.VITE_GRAPHQL_API_ENDPOINT)
+
 await server.register(quotesGraphQLClient, {
   url: process.env.VITE_GRAPHQL_API_ENDPOINT,
 })

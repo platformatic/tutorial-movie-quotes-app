@@ -16,13 +16,13 @@ export const decorateRequest = [
   'formValues',
   'loadError',
   'saveError',
-  'quoteId'
+  'quoteId',
 ]
 
-export async function preHandler (req, reply) {
+export async function preHandler(req, reply) {
   req.movieId = Number(req.params.id)
   const formData: QuoteFormData = {}
-  req.formValues = formData;
+  req.formValues = formData
   req.loadError = false
   req.saveError = false
 
@@ -58,8 +58,9 @@ export async function preHandler (req, reply) {
     }
     reply.redirect('/')
   } else {
+    // biome-ignore lint/suspicious/noImplicitAnyLet: to avoid extending rewrite too much
     let data
-    try { 
+    try {
       data = await req.quotes.graphql({
         query: `
           query($id: ID!) {

@@ -21,8 +21,6 @@ export async function getMovieId(req, inputMovieName) {
     return null
   }
 
-  console.log({ movies })
-
   const movieExists = movies.length === 1
   if (movieExists) {
     movieId = movies[0].id

@@ -13,7 +13,7 @@ export const head = (
   </>
 )
 
-export async function preHandler (req, reply) {
+export async function preHandler(req, reply) {
   const formData: QuoteFormData = {}
   req.formData = formData
   req.saveError = false
@@ -46,9 +46,9 @@ export async function preHandler (req, reply) {
       console.error(error)
       req.saveError = true
     }
-  }
-  if (!req.saveError) {
-    return reply.redirect('/')
+    if (!req.saveError) {
+      return reply.redirect('/')
+    }
   }
   req.page = 'add'
 }

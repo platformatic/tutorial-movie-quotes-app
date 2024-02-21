@@ -9,7 +9,7 @@ export const head = (
   </>
 )
 
-export async function preHandler (req, reply) {
+export async function preHandler(req, reply) {
   if (isPostRequest(req)) {
     const id = Number(req.params.id)
     try {

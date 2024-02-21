@@ -11,6 +11,7 @@ export default ({ id }: Props) => {
       hx-target="closest .quote"
       hx-swap="outerHTML"
       hx-confirm="Are you sure want to delete this quote?"
+      type="button"
       class="flex items-center text-gray-400 hover:text-red-700 underline decoration-red-700 decoration-2 underline-offset-4"
     >
       <svg

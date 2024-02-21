@@ -36,7 +36,7 @@ export default async ({ req }) => {
     <main>
       {quotes.length > 0 ? (
         quotes.map((quote) => (
-          <div class="border-b mb-6" class="quote">
+          <div class="border-b mb-6 quote">
             <blockquote class="text-2xl mb-0">
               <p class="mb-4">{quote.quote}</p>
             </blockquote>

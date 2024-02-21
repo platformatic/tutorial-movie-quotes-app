@@ -1,6 +1,6 @@
 import Html from '@kitajs/html'
-import styles from './QuoteActionLike.module.css'
 import './QuoteActionLike.client.js'
+import styles from './QuoteActionLike.module.css'
 
 export interface Props extends Html.PropsWithChildren {
   id: number
@@ -12,7 +12,7 @@ export default ({ id, likes }: Props) => {
     <>
       <span
         data-like-quote
-        hx-post={`/api/like-movie-quote/${id}`} 
+        hx-post={`/api/like-movie-quote/${id}`}
         hx-target="find span[data-like-count]"
         class={`${styles.likeQuote} cursor-pointer mr-5 flex items-center`}
       >
@@ -32,9 +32,7 @@ export default ({ id, likes }: Props) => {
             d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
           />
         </svg>
-        <span 
-          data-like-count
-          class={`${styles.likesCount} w-8`}>
+        <span data-like-count class={`${styles.likesCount} w-8`}>
           {likes}
         </span>
       </span>
