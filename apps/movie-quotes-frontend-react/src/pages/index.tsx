@@ -42,25 +42,26 @@ export function getMeta () {
 }
 
 export default () => {
+  console.log('pages/index.tsx')
   const { page, quotes } = useRouteContext().data
   return (
     <main>
       {quotes.length > 0 ? (
         quotes.map((quote) => (
-          <div class="border-b mb-6 quote">
-            <blockquote class="text-2xl mb-0">
-              <p class="mb-4">{quote.quote}</p>
+          <div key={`quote-${quote.id}`} className="border-b mb-6 quote">
+            <blockquote className="text-2xl mb-0">
+              <p className="mb-4">{quote.quote}</p>
             </blockquote>
-            <p class="text-xl mt-0 mb-8 text-gray-400">
+            <p className="text-xl mt-0 mb-8 text-gray-400">
               — {quote.saidBy}, {quote.movie?.name}
             </p>
-            <div class="flex flex-col mb-6 text-gray-400">
-              <span class="flex items-center">
+            <div className="flex flex-col mb-6 text-gray-400">
+              <span className="flex items-center">
                 <QuoteActionLike id={quote.id} likes={quote.likes} />
                 <QuoteActionEdit id={quote.id} />
                 <QuoteActionDelete id={quote.id} />
               </span>
-              <span class="mt-4 text-gray-400 italic">
+              <span className="mt-4 text-gray-400 italic">
                 Added {new Date(quote.createdAt).toUTCString()}
               </span>
             </div>

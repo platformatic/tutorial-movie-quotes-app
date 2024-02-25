@@ -12,13 +12,13 @@ export default ({ children }) => {
       </header>
       <nav className="prose mx-auto mb-6 border-y border-gray-200 flex">
         <Link
-          to="/?sort=createdAt"
+          to={{pathname: "/", search: '?sort=createdAt' }}
           className={`p-3 ${page === 'listing-createdAt' && navActiveClasses}`}
         >
           Latest quotes
         </Link>
         <Link
-          to="/?sort=likes"
+          to={{pathname: "/", search: '?sort=likes' }}
           className={`p-3 ${page === 'listing-likes' && navActiveClasses}`}
         >
           Top quotes

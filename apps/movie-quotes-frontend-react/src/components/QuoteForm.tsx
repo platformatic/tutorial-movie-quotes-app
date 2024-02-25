@@ -27,7 +27,13 @@ interface Props {
   submitLabel: string
 }
 
-export default ({ values, action, loadError, saveError }: Props) => {
+export default ({ 
+  values, 
+  action, 
+  loadError, 
+  saveError,
+  submitLabel
+}: Props) => {
   const { movies } = useRouteContext().data 
   return (
     <>
@@ -42,37 +48,35 @@ export default ({ values, action, loadError, saveError }: Props) => {
         </p>
       )}
       <form method="post" action={action} className="grid grid-cols-1 gap-6">
-        <label for="quote" className="block">
+        <label htmlFor="quote" className="block">
           <span>Quote</span>
           <textarea
             id="quote"
             name="quote"
             required="required"
-            className="mt-1 w-full"
-          >
-            {values.quote}
-          </textarea>
+            className="mt-1 w-full" 
+            defaultValue={values.quote} />
         </label>
-        <label for="said-by" className="block">
+        <label htmlFor="said-by" className="block">
           <span>Said by</span>
           <input
             type="text"
             id="said-by"
             name="saidBy"
             required="required"
-            value={values.saidBy}
+            defaultValue={values.saidBy}
             className="mt-1 w-full"
           />
         </label>
-        <label for="movie" className="block">
+        <label htmlFor="movie" className="block">
           <span>Movie</span>
           <input
             list="movies"
             id="movie"
             name="movie"
             required="required"
-            autocomplete="off"
-            value={values.movie}
+            autoComplete="off"
+            defaultValue={values.movie}
             className="form-input mt-1 w-full"
           />
         </label>
