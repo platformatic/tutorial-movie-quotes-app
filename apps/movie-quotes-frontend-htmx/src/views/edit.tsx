@@ -20,21 +20,20 @@ export const decorateRequest = [
 ]
 
 export async function preHandler(req, reply) {
-  req.movieId = Number(req.params.id)
-  const formData: QuoteFormData = {}
-  req.formValues = formData
-  req.loadError = false
-  req.saveError = false
+  const id = Number(req.params.id)
+  let formValues: QuoteFormData = {}
+  let loadError = false
+  let saveError = false
 
   if (isPostRequest(req)) {
-    req.formData = req.body
-    req.movieId = await getMovieId(req, formData.movie)
+    formValues = req.body
+    const movieId = await getMovieId(req, formValues.movie)
 
     if (movieId) {
       const quote = {
         id: req.movieId,
-        quote: formData.quote,
-        saidBy: formData.saidBy,
+        quote: formValues.quote,
+        saidBy: formValues.saidBy,
         movieId,
       }
 
@@ -49,19 +48,19 @@ export async function preHandler(req, reply) {
           `,
           variables: { quote },
         })
+        reply.redirect('/')
       } catch (error) {
         console.log(error)
-        req.saveError = true
+        saveError = true
       }
     } else {
-      req.saveError = true
+      saveError = true
     }
-    reply.redirect('/')
   } else {
     // biome-ignore lint/suspicious/noImplicitAnyLet: to avoid extending rewrite too much
-    let data
+    let quote
     try {
-      data = await req.quotes.graphql({
+      quote = await req.quotes.graphql({
         query: `
           query($id: ID!) {
             getQuoteById(id: $id) {
@@ -75,19 +74,23 @@ export async function preHandler(req, reply) {
             }
           }
         `,
-        variables: { id: req.movieId },
+        variables: { id },
       })
     } catch {
-      req.loadError = true
+      loadError = true
     }
 
-    if (data) {
-      req.formValues = {
-        ...data,
-        movie: data.movie.name,
+    if (quote) {
+      formValues = {
+        ...quote,
+        movie: quote.movie.name,
       }
     }
   }
+
+  req.formValues = formValues
+  req.loadError = loadError
+  req.saveError = saveError
 }
 
 export default async ({ req, reply }) => {
