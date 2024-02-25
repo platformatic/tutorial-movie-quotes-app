@@ -1,0 +1,32 @@
+---
+export interface Props {
+  title: string;
+  page?: string;
+}
+
+const { title, page } = Astro.props;
+
+const navActiveClasses = "font-bold bg-yellow-400 no-underline";
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{title}</title>
+  </head>
+  <body class="py-8">
+    <header class="prose mx-auto mb-6">
+      <h1>🎬 Movie Quotes</h1>
+    </header>
+    <nav class="prose mx-auto mb-6 border-y border-gray-200 flex">
+      <a href="/?sort=createdAt" class={`p-3 ${page === "listing-createdAt" && navActiveClasses}`}>Latest quotes</a>
+      <a href="/?sort=likes" class={`p-3 ${page === "listing-likes" && navActiveClasses}`}>Top quotes</a>
+      <a href="/add" class={`p-3 ${page === "add" && navActiveClasses}`}>Add a quote</a>
+    </nav>
+    <section class="prose mx-auto">
+      <slot />
+    </section>
+  </body>
+</html>

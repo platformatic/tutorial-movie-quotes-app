@@ -1,0 +1,54 @@
+---
+import { quotesApi, gql } from '../lib/quotes-api.js';
+
+export interface QuoteFormData {
+  id?: number;
+  quote?: string;
+  saidBy?: string;
+  movie?: string;
+}
+
+export interface Props {
+  action: string;
+  values?: QuoteFormData;
+  saveError?: boolean;
+  loadError?: boolean;
+  submitLabel: string;
+}
+
+const { action, values = {}, saveError, loadError, submitLabel } = Astro.props;
+
+const { data } = await quotesApi.query(gql`
+  query {
+    movies {
+      name
+    }
+  }
+`);
+
+const movies = data?.movies || [];
+---
+
+{saveError && <p class="text-lg bg-red-200 p-4">There was an error saving the quote. Please try again.</p>}
+{loadError && <p class="text-lg bg-red-200 p-4">There was an error loading the quote. Please try again.</p>}
+
+<form method="post" action={action} class="grid grid-cols-1 gap-6">
+  <label for="quote" class="block">
+    <span>Quote</span>
+    <textarea id="quote" name="quote" required="required" class="mt-1 w-full">{values.quote}</textarea>
+  </label>
+  <label for="said-by" class="block">
+    <span>Said by</span>
+    <input type="text" id="said-by" name="saidBy" required="required" value={values.saidBy} class="mt-1 w-full">
+  </label>
+  <label for="movie" class="block">
+    <span>Movie</span>
+    <input list="movies" id="movie" name="movie" required="required" autocomplete="off" value={values.movie} class="form-input mt-1 w-full">
+    <datalist id="movies">
+      {movies.map(({ name }) => (
+        <option>{name}</option>
+      ))}
+    </datalist>
+  </label>
+  <input type="submit" value={submitLabel} disabled={loadError && "disabled"} class="bg-yellow-400 hover:bg-yellow-500 text-gray-900 round p-3" />
+</form>
