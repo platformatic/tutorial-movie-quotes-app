@@ -1,0 +1,229 @@
+type Query {
+  getQuoteById(id: ID!): Quote
+  quotes(limit: LimitInt, offset: Int, orderBy: [QuoteOrderByArguments], where: QuoteWhereArguments): [Quote]
+  countQuotes(where: QuoteWhereArguments): quotesCount
+  getMovieById(id: ID!): Movie
+  movies(limit: LimitInt, offset: Int, orderBy: [MovieOrderByArguments], where: MovieWhereArguments): [Movie]
+  countMovies(where: MovieWhereArguments): moviesCount
+}
+
+type Quote {
+  id: ID
+  quote: String
+  saidBy: String
+  createdAt: String
+  likes: Int
+  movie: Movie
+}
+
+type Movie {
+  id: ID
+  name: String
+  quotes(limit: LimitInt, offset: Int, orderBy: [QuoteOrderByArguments], where: QuoteWhereArguments): [Quote]
+}
+
+"""
+Limit will be applied by default if not passed. If the provided value exceeds the maximum allowed value a validation error will be thrown
+"""
+scalar LimitInt
+
+input QuoteOrderByArguments {
+  field: QuoteOrderByField
+  direction: OrderByDirection!
+}
+
+enum QuoteOrderByField {
+  id
+  quote
+  saidBy
+  createdAt
+  movieId
+  likes
+}
+
+enum OrderByDirection {
+  ASC
+  DESC
+}
+
+input QuoteWhereArguments {
+  id: QuoteWhereArgumentsid
+  quote: QuoteWhereArgumentsquote
+  saidBy: QuoteWhereArgumentssaidBy
+  createdAt: QuoteWhereArgumentscreatedAt
+  movieId: QuoteWhereArgumentsmovieId
+  likes: QuoteWhereArgumentslikes
+  or: [QuoteWhereArgumentsOr]
+}
+
+input QuoteWhereArgumentsid {
+  eq: ID
+  neq: ID
+  gt: ID
+  gte: ID
+  lt: ID
+  lte: ID
+  like: ID
+  in: [ID]
+  nin: [ID]
+}
+
+input QuoteWhereArgumentsquote {
+  eq: String
+  neq: String
+  gt: String
+  gte: String
+  lt: String
+  lte: String
+  like: String
+  in: [String]
+  nin: [String]
+}
+
+input QuoteWhereArgumentssaidBy {
+  eq: String
+  neq: String
+  gt: String
+  gte: String
+  lt: String
+  lte: String
+  like: String
+  in: [String]
+  nin: [String]
+}
+
+input QuoteWhereArgumentscreatedAt {
+  eq: String
+  neq: String
+  gt: String
+  gte: String
+  lt: String
+  lte: String
+  like: String
+  in: [String]
+  nin: [String]
+}
+
+input QuoteWhereArgumentsmovieId {
+  eq: ID
+  neq: ID
+  gt: ID
+  gte: ID
+  lt: ID
+  lte: ID
+  like: ID
+  in: [ID]
+  nin: [ID]
+}
+
+input QuoteWhereArgumentslikes {
+  eq: Int
+  neq: Int
+  gt: Int
+  gte: Int
+  lt: Int
+  lte: Int
+  like: Int
+  in: [Int]
+  nin: [Int]
+}
+
+input QuoteWhereArgumentsOr {
+  id: QuoteWhereArgumentsid
+  quote: QuoteWhereArgumentsquote
+  saidBy: QuoteWhereArgumentssaidBy
+  createdAt: QuoteWhereArgumentscreatedAt
+  movieId: QuoteWhereArgumentsmovieId
+  likes: QuoteWhereArgumentslikes
+}
+
+type quotesCount {
+  total: Int
+}
+
+input MovieOrderByArguments {
+  field: MovieOrderByField
+  direction: OrderByDirection!
+}
+
+enum MovieOrderByField {
+  id
+  name
+}
+
+input MovieWhereArguments {
+  id: MovieWhereArgumentsid
+  name: MovieWhereArgumentsname
+  or: [MovieWhereArgumentsOr]
+}
+
+input MovieWhereArgumentsid {
+  eq: ID
+  neq: ID
+  gt: ID
+  gte: ID
+  lt: ID
+  lte: ID
+  like: ID
+  in: [ID]
+  nin: [ID]
+}
+
+input MovieWhereArgumentsname {
+  eq: String
+  neq: String
+  gt: String
+  gte: String
+  lt: String
+  lte: String
+  like: String
+  in: [String]
+  nin: [String]
+}
+
+input MovieWhereArgumentsOr {
+  id: MovieWhereArgumentsid
+  name: MovieWhereArgumentsname
+}
+
+type moviesCount {
+  total: Int
+}
+
+type Mutation {
+  saveQuote(input: QuoteInput!): Quote
+  insertQuotes(inputs: [QuoteInput]!): [Quote]
+  deleteQuotes(where: QuoteWhereArguments): [Quote]
+  saveMovie(input: MovieInput!): Movie
+  insertMovies(inputs: [MovieInput]!): [Movie]
+  deleteMovies(where: MovieWhereArguments): [Movie]
+  likeQuote(id: ID!): Int
+}
+
+input QuoteInput {
+  id: ID
+  quote: String
+  saidBy: String
+  movieId: ID
+  likes: Int
+}
+
+input MovieInput {
+  id: ID
+  name: String
+}
+
+type Subscription {
+  quoteSaved: Quote
+  quoteDeleted: QuoteDeleted
+  movieSaved: Movie
+  movieDeleted: MovieDeleted
+}
+
+type QuoteDeleted {
+  id: ID
+}
+
+type MovieDeleted {
+  id: ID
+}
