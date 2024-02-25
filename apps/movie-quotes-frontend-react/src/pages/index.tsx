@@ -1,4 +1,4 @@
-import { useRouteContext } from '/:core.js'
+import { useRouteContext } from '/:core.jsx'
 
 import QuoteActionEdit from '/components/QuoteActionEdit.tsx'
 import QuoteActionDelete from '/components/QuoteActionDelete.tsx'

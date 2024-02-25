@@ -1,5 +1,5 @@
 
-import { useRouteContext } from '/:core.js'
+import { useRouteContext } from '/:core.jsx'
 
 import QuoteForm, { QuoteFormData } from '/components/QuoteForm.tsx';
 

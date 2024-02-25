@@ -1,8 +1,10 @@
+import { Link } from 'react-router-dom'
+
 interface Props {
   id: string
 }
 
-export default ({ id }: Props) {
+export default ({ id }: Props) => {
   return (
     <Link
       to={`/edit/${id}`}

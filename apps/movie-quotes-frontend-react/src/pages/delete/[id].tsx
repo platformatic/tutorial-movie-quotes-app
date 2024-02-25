@@ -21,7 +21,7 @@ export async function getData({ req, reply }) {
   }
 }
 
-export default ({ req, reply }) {
+export default ({ req, reply }) => {
   return (
     <main>
       <h2>Delete quote</h2>
