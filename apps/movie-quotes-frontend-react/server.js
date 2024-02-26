@@ -20,6 +20,20 @@ await server.register(quotesGraphQLClient, {
   url: process.env.VITE_GRAPHQL_API_ENDPOINT,
 })
 
+server.post('/api/like-movie-quote/:id', async (req, reply) => {
+  const id = Number(req.params.id)
+  const liked = await req.quotes.graphql({
+    query: `
+      mutation($id: ID!) {
+        likeQuote(id: $id)
+      }
+    `,
+    variables: { id },
+  })
+  reply.type('text/plain')
+  reply.send(liked.toString())
+})
+
 await server.register(FastifyVite, {
   root: import.meta.url,
   renderer: '@fastify/react',

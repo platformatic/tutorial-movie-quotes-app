@@ -1,24 +1,25 @@
+import { useState } from 'react'
+
 interface Props {
   id: string
   likes: number
 }
 
-// const likes = ref(props.likes)
-
-// async function likeQuote () {
-//   const { data } = await quotesApi.mutation(gql`
-//     mutation($id: ID!) {
-//       likeQuote(id: $id)
-//     }
-//   `, { id: props.id })
-//   if (data?.likeQuote) {
-//     likes.value = data.likeQuote
-//   }
-// }
-
-export default ({ likes }: Props) => {
+export default ({ id, likes: initialLikes }: Props) => {
+  const [likes, setLikes] = useState(initialLikes)
+  async function likeQuote () {
+    const newLikes = await (
+      await fetch(`/api/like-movie-quote/${id}`, { 
+        method: 'POST'
+      })
+    ).text()
+    if (newLikes !== likes) {
+      setLikes(newLikes)
+    }
+  }
   return (
     <span 
+      onClick={likeQuote}
       className={cn`
         like-quote cursor-pointer mr-5 flex items-center',
         ${likes === 0 && 'cursor-pointer'},
@@ -48,4 +49,3 @@ function cn (fragments, ...values) {
   }
   return attrValue
 }
-
