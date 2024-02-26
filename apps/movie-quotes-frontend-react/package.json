@@ -25,6 +25,7 @@
     "@platformatic/client": "^1.23.0",
     "@tailwindcss/forms": "^0.5.3",
     "@tailwindcss/typography": "^0.5.9",
+    "@vitejs/plugin-react": "^4.2.1",
     "postcss": "^8.4.32",
     "postcss-nesting": "^12.0.2",
     "postcss-preset-env": "^7.7.1",

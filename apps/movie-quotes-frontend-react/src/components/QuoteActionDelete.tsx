@@ -2,7 +2,7 @@ interface Props {
   id: string
 }
 
-function confirmDelete(event) {
+function confirmDelete({ event }) {
   event.preventDefault()
   if (confirm('Are you sure want to delete this quote?')) {
     event.currentTarget.submit()
