@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { quotesApi, gql } from '../lib/quotes-api.js'
 
 const props = defineProps<{
   id: string
@@ -9,14 +8,11 @@ const props = defineProps<{
 
 const likes = ref(props.likes)
 
-async function likeQuote () {
-  const { data } = await quotesApi.mutation(gql`
-    mutation($id: ID!) {
-      likeQuote(id: $id)
-    }
-  `, { id: props.id })
-  if (data?.likeQuote) {
-    likes.value = data.likeQuote
+async function likeQuote() {
+  const req = await fetch(`/api/like-movie-quote/${props.id}`, { method: 'POST' })
+  const newLikes = Number(await req.text())
+  if (newLikes !== likes) {
+    likes.value = newLikes
   }
 }
 </script>
@@ -24,8 +20,8 @@ async function likeQuote () {
 <template>
   <span 
     @click.once="likeQuote"
-    class="like-quote cursor-pointer mr-5 flex items-center"
-    :class="{'cursor-pointer': likes === 0, 'liked': likes > 0}">
+    class="like-quote mr-5 flex items-center"
+    :class="{'cursor-pointer': likes === 0, liked: likes > 0}">
     <svg 
       class="like-icon w-6 h-6 mr-2 text-red-600"
       xmlns="http://www.w3.org/2000/svg" 
