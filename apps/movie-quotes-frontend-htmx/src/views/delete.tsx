@@ -30,7 +30,7 @@ export async function preHandler(req, reply) {
   }
 }
 
-export default async ({ req, reply }) => {
+export default ({ req, reply }) => {
   return (
     <main>
       <h2>Delete quote</h2>

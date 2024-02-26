@@ -1,6 +1,6 @@
 import { useRouteContext } from '/:core.jsx'
 
-export function getData ({ req }) {
+export function getData({ req }) {
   return req.quotes.graphql({
     query: `
       query {
@@ -27,14 +27,14 @@ interface Props {
   submitLabel: string
 }
 
-export default ({ 
-  values, 
-  action, 
-  loadError, 
+export default ({
+  values,
+  action,
+  loadError,
   saveError,
-  submitLabel
+  submitLabel,
 }: Props) => {
-  const { movies } = useRouteContext().data 
+  const { movies } = useRouteContext().data
   return (
     <>
       {saveError && (
@@ -54,8 +54,9 @@ export default ({
             id="quote"
             name="quote"
             required="required"
-            className="mt-1 w-full" 
-            defaultValue={values.quote} />
+            className="mt-1 w-full"
+            defaultValue={values.quote}
+          />
         </label>
         <label htmlFor="said-by" className="block">
           <span>Said by</span>

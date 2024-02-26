@@ -1,18 +1,17 @@
-
 import { useRouteContext } from '/:core.jsx'
 
-import QuoteForm, { QuoteFormData } from '/components/QuoteForm.tsx';
+import QuoteForm, { QuoteFormData } from '/components/QuoteForm.tsx'
 
-import { getMovieId } from '/lib/quotes-api';
-import { isPostRequest, getFormData } from '/lib/request-utils';
+import { getMovieId } from '/lib/quotes-api'
+import { getFormData, isPostRequest } from '/lib/request-utils'
 
-export function getMeta () {
+export function getMeta() {
   return {
-    title: 'Edit movie quote'
+    title: 'Edit movie quote',
   }
 }
 
-export async function getData ({ req, reply }) {
+export async function getData({ req, reply }) {
   const id = Number(req.params.id)
   let formValues: QuoteFormData = {}
   let loadError = false
@@ -89,7 +88,7 @@ export async function getData ({ req, reply }) {
 }
 
 export default () => {
-  const { id, saveError, loadError, formValues } = useRouteContext().data;
+  const { id, saveError, loadError, formValues } = useRouteContext().data
   return (
     <main>
       <h2>Edit quote</h2>

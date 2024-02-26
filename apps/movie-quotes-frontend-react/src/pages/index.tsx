@@ -1,10 +1,10 @@
 import { useRouteContext } from '/:core.jsx'
 
-import QuoteActionEdit from '/components/QuoteActionEdit.tsx'
 import QuoteActionDelete from '/components/QuoteActionDelete.tsx'
+import QuoteActionEdit from '/components/QuoteActionEdit.tsx'
 import QuoteActionLike from '/components/QuoteActionLike.tsx'
 
-export async function getData ({ req }) {
+export async function getData({ req }) {
   const allowedSortFields = ['createdAt', 'likes']
   const searchParamSort = req.query.sort
   const sort = allowedSortFields.includes(searchParamSort)
@@ -35,9 +35,9 @@ export async function getData ({ req }) {
   }
 }
 
-export function getMeta () {
+export function getMeta() {
   return {
-    title: 'All quotes'
+    title: 'All quotes',
   }
 }
 

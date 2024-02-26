@@ -1,3 +1,3 @@
-export function isPostRequest (request) {
+export function isPostRequest(request) {
   return request.method === 'POST'
 }

@@ -1,12 +1,12 @@
 import { useRouteContext } from '/:core.jsx'
 
-import QuoteForm from '/components/QuoteForm.tsx';
-import type { QuoteFormData } from '/components/QuoteForm.tsx';
+import QuoteForm from '/components/QuoteForm.tsx'
+import type { QuoteFormData } from '/components/QuoteForm.tsx'
 
-import { getMovieId } from '/lib/quotes-api';
-import { isPostRequest } from '/lib/request-utils';
+import { getMovieId } from '/lib/quotes-api'
+import { isPostRequest } from '/lib/request-utils'
 
-export async function getData ({ req, reply }) {
+export async function getData({ req, reply }) {
   let formData: QuoteFormData = {}
   let saveError = false
 

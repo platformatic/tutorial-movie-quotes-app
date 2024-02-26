@@ -1,4 +1,4 @@
-import { isPostRequest } from '../../lib/request-utils';
+import { isPostRequest } from '../../lib/request-utils'
 
 export async function getData({ req, reply }) {
   if (isPostRequest(req)) {
