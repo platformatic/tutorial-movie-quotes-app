@@ -29,7 +29,7 @@
     "@fastify/htmx": "0.2.0",
     "@fastify/one-line-logger": "^1.2.0",
     "@fastify/vite": "^6.0.2",
-    "@kitajs/html": "^3.1.2",
+    "@kitajs/html": "^4.1.0",
     "@platformatic/client": "^1.23.0",
     "@urql/core": "^4.0.10",
     "fastify": "^4.26.1",
