@@ -1,6 +1,9 @@
 <script setup>
 import { useRouteContext } from '/:core.js'
-const { page } = useRouteContext().data
+
+const context = useRouteContext()
+const { page } = context.data
+
 const navActiveClasses = 'font-bold bg-yellow-400 no-underline'
 </script>
 
@@ -9,9 +12,9 @@ const navActiveClasses = 'font-bold bg-yellow-400 no-underline'
     <h1>🎬 Movie Quotes</h1>
   </header>
   <nav class="prose mx-auto mb-6 border-y border-gray-200 flex">
-    <router-link to="/?sort=createdAt" :class="['p-3', page === 'listing-createdAt' ? navActiveClasses : '']">Latest quotes</router-link>
-    <router-link to="/?sort=likes" :class="['p-3', page === 'listing-likes' ? navActiveClasses : '']">Top quotes</router-link>
-    <router-link to="/add" :class="['p-3', page === 'add' ? navActiveClasses : '']">Add a quote</router-link>
+    <a href="/?sort=createdAt" :class="['p-3', page === 'listing-createdAt' ? navActiveClasses : '']">Latest quotes</a>
+    <a href="/?sort=likes" :class="['p-3', page === 'listing-likes' ? navActiveClasses : '']">Top quotes</a>
+    <a href="/add" :class="['p-3', page === 'add' ? navActiveClasses : '']">Add a quote</a>
   </nav>
   <section class="prose mx-auto">
     <slot />
