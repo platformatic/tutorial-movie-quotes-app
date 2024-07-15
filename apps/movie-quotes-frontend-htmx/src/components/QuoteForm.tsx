@@ -35,16 +35,16 @@ export default async ({
 
   return (
     <>
-      {saveError && (
+      {saveError ? (
         <p class="text-lg bg-red-200 p-4">
           There was an error saving the quote. Please try again.
         </p>
-      )}
-      {loadError && (
+      ) : ''}
+      {loadError ? (
         <p class="text-lg bg-red-200 p-4">
           There was an error loading the quote. Please try again.
         </p>
-      )}
+      ) : ''}
       <form method="post" action={action} class="grid grid-cols-1 gap-6">
         <label for="quote" class="block">
           <span>Quote</span>
