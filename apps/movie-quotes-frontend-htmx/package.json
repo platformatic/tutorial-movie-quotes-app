@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "@fastify/formbody": "^7.4.0",
-    "@fastify/htmx": "0.2.0",
+    "@fastify/htmx": "0.4.0",
     "@fastify/one-line-logger": "^1.2.0",
     "@fastify/vite": "^6.0.2",
     "@kitajs/html": "^4.1.0",
