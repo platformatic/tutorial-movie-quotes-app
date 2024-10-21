@@ -1,7 +1,7 @@
 # 🎬 Movie Quotes application
 
 This is the application code for the
-[Movie Quotes App Tutorial](https://docs.platformatic.dev/docs/getting-started/movie-quotes-app-tutorial/).
+[Movie Quotes App Tutorial](https://docs.platformatic.dev/docs/guides/movie-quotes-app-tutorial).
 
 ## Requirements
 
